@@ -1,0 +1,12 @@
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.exe.config
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.csprojResolveAssemblyReference.cache
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.exe
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.pdb
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.exe
+D:\users\cheneyshen.tencent\documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.pdb
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.exe.config
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.exe
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.pdb
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.exe
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\bin\Debug\SculptorScoketServer.pdb
+D:\Users\cheneyshen\Documents\visual studio 2015\Projects\SculptorScoketServer\SculptorScoketServer\obj\Debug\SculptorScoketServer.csprojResolveAssemblyReference.cache
