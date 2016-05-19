@@ -27,19 +27,26 @@ namespace SculptorScoketServer
             while (true)
             {
                 // client disconnect
-                //if (clientSocket.Poll(10, SelectMode.SelectRead))
-                //{
-                //    clientSocket.Close();
-                //    break;
-                //}
+                if (clientSocket.Poll(-1, SelectMode.SelectRead))
+                {
+                    int nRead = clientSocket.Receive(data);
+                    if (nRead == 0)
+                    {
+                        clientSocket.Close();
+                        Console.WriteLine("Disconnect a Client...");
+                        break;
+                    }
+                    else
+                    {
+                        // receive message
+                        int length = clientSocket.Receive(data);
+                        string message = Encoding.UTF8.GetString(data, 0, length);
 
-                // send message
-                int length = clientSocket.Receive(data);
-                string message = Encoding.UTF8.GetString(data, 0, length);
-
-                // boardcast message
-                Program.BroadcastMessage(message);
-                //Console.WriteLine(message);
+                        // boardcast message
+                        Program.BroadcastMessage(message);
+                        //Console.WriteLine(message);
+                    }
+                }
             }
         }
 
