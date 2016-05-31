@@ -44,7 +44,7 @@ namespace SculptorScoketServer
 
                         // boardcast message
                         Program.BroadcastMessage(message);
-                        //Console.WriteLine(message);
+                        Console.WriteLine(message);
                     }
                 }
             }
