@@ -19,7 +19,7 @@ namespace SculptorScoketServer
 
         // UDP use
         private static Socket udpServer;
-        private static string clientIP1 = "10.32.92.107";
+        private static List<string> clientIPs;
         private static int recvProt = 8885;
         private static int sendProt = 8886;
 
@@ -69,6 +69,8 @@ namespace SculptorScoketServer
             }
             else
             {
+                clientIPs = new List<string>();
+
                 udpServer = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 udpServer.Bind(new IPEndPoint(IPAddress.Parse(myIP), recvProt));
                 Console.WriteLine("UDP Server Start...");
@@ -79,9 +81,12 @@ namespace SculptorScoketServer
 
         static void SendMsg(string message)
         {
-            EndPoint point = new IPEndPoint(IPAddress.Parse(clientIP1), sendProt);
-            udpServer.SendTo(Encoding.UTF8.GetBytes(message), point);
-            //Console.WriteLine("Send: " + point.ToString() + " " + message);
+            foreach(string cip in clientIPs)
+            {
+                EndPoint point = new IPEndPoint(IPAddress.Parse(cip), sendProt);
+                udpServer.SendTo(Encoding.UTF8.GetBytes(message), point);
+                //Console.WriteLine("Send: " + point.ToString() + " " + message);
+            }
         }
 
         static void ReciveMsg()
@@ -94,6 +99,22 @@ namespace SculptorScoketServer
                 string message = Encoding.UTF8.GetString(buffer, 0, length);
 
                 //Console.WriteLine("Receive: " + point.ToString() + " " + message);
+
+                bool iscontain = false;
+                string newIP = point.ToString().Split(':')[0];
+                foreach (string cip in clientIPs)
+                {
+                    if (cip.Equals(newIP))
+                    {
+                        iscontain = true;
+                    }
+                }
+                if (!iscontain)
+                {
+                    clientIPs.Add(newIP);
+                    Console.WriteLine("Add Client: " + point.ToString());
+                }
+
                 if (message != "")
                 {
                     SendMsg(message);
