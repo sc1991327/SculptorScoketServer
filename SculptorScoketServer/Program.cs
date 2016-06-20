@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Text;
+using System.IO;
 
 namespace SculptorScoketServer
 {
@@ -20,8 +22,8 @@ namespace SculptorScoketServer
         // UDP use
         private static Socket udpServer;
         private static List<string> clientIPs;
-        private static int recvProt = 8885;
-        private static int sendProt = 8886;
+        private static int recvProt;
+        private static int sendProt;
 
         static List<Client> clientlists = new List<Client>();
 
@@ -45,9 +47,70 @@ namespace SculptorScoketServer
             }
         }
 
+        public static bool ReadConfig(string fileName)
+        {
+            // Handle any problems that might arise when reading the text
+            try
+            {
+                string line;
+                StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+                using (theReader)
+                {
+                    do
+                    {
+                        line = theReader.ReadLine();
+                        if (line != null)
+                        {
+                            string[] entries = line.Split('=');
+                            if (entries.Length == 2)
+                            {
+                                switch (entries[0])
+                                {
+                                    case "sendPort":
+                                        sendProt = IntParseFast(entries[1]);
+                                        break;
+                                    case "recvPort":
+                                        recvProt = IntParseFast(entries[1]);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    while (line != null);
+                    theReader.Close();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0}\n", e.Message);
+                return false;
+            }
+        }
+
+        public static int IntParseFast(string value)
+        {
+            int result = 0;
+            for (int i = 0; i < value.Length; i++)
+            {
+                char letter = value[i];
+                result = 10 * result + (letter - 48);
+            }
+            return result;
+        }
+
+        public static int IntParseFast(char value)
+        {
+            int result = 0;
+            result = 10 * result + (value - 48);
+            return result;
+        }
+
         static void Main(string[] args)
         {
             myIP = GetLocalIPAddress();
+
+            ReadConfig("serverConfig.txt");
 
             if (useTcp)
             {
@@ -73,6 +136,7 @@ namespace SculptorScoketServer
 
                 udpServer = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 udpServer.Bind(new IPEndPoint(IPAddress.Parse(myIP), recvProt));
+                Console.WriteLine("Server IP: " + GetLocalIPAddress());
                 Console.WriteLine("UDP Server Start...");
                 Thread t = new Thread(ReciveMsg); // start receive thread
                 t.Start();
